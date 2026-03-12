@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export const loadStarbucksData = () => {
   return new Promise((resolve, reject) => {
-    Papa.parse('/data/starbucks_customer_ordering_patterns.csv', {
+    Papa.parse('/data/starbucks_cleaned.csv', {
       download: true,
       header: true,
       dynamicTyping: true,
