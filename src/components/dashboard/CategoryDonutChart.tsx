@@ -1,34 +1,36 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
-
-const data = [
-  { name: "Espresso", value: 38 },
-  { name: "Frappuccino", value: 25 },
-  { name: "Tea", value: 20 },
-  { name: "Cold Brew", value: 17 },
-];
+import { Smartphone } from "lucide-react";
+import ChartCard from "./ChartCard";
 
 interface CategoryDonutProps {
   data?: { channel: string; count: number; pct: number }[];
 }
 
-const COLORS = ["#00704A", "#CBA258", "#1E3932", "#6B7280", "#00A862"];
+const COLORS = ["#006241", "#1E3932", "#D4A373", "#2E1A12", "#6B7280"];
 
 const CategoryDonutChart = ({ data }: CategoryDonutProps) => (
-  <div className="bg-card border border-border rounded-lg p-5 opacity-0 animate-fade-in" style={{ animationDelay: "400ms" }}>
-    <h3 className="text-sm font-medium text-foreground mb-4">Order Channel Distribution</h3>
-    <div className="h-72">
+  <ChartCard 
+    title="Omni-channel Mix" 
+    subtitle="Fulfillment Distribution" 
+    icon={Smartphone}
+    delay={400}
+  >
+    <div className="h-[340px] w-full mt-4">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={95}
-            paddingAngle={3}
+            cy="45%"
+            innerRadius={80}
+            outerRadius={115}
+            paddingAngle={8}
+            cornerRadius={10}
             dataKey="count"
             nameKey="channel"
             stroke="none"
+            animationBegin={500}
+            animationDuration={1500}
           >
             {data?.map((_, i) => (
               <Cell key={i} fill={COLORS[i % COLORS.length]} />
@@ -37,23 +39,26 @@ const CategoryDonutChart = ({ data }: CategoryDonutProps) => (
           <Tooltip
             formatter={(value: number) => value.toLocaleString()}
             contentStyle={{
-              backgroundColor: "hsl(var(--card))",
-              border: "1px solid hsl(var(--border))",
-              borderRadius: 8,
-              fontSize: 13,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+              backgroundColor: "hsl(var(--background))",
+              border: "none",
+              borderRadius: "1.25rem",
+              fontSize: "14px",
+              fontWeight: "700",
+              boxShadow: "0 20px 40px -10px rgba(0,0,0,0.15)",
+              padding: "16px",
             }}
           />
           <Legend
             verticalAlign="bottom"
             iconType="circle"
-            iconSize={8}
-            formatter={(value) => <span className="text-muted-foreground text-xs">{value}</span>}
+            iconSize={10}
+            formatter={(value) => <span className="text-foreground font-bold text-sm ml-1">{value}</span>}
+            wrapperStyle={{ paddingTop: "30px" }}
           />
         </PieChart>
       </ResponsiveContainer>
     </div>
-  </div>
+  </ChartCard>
 );
 
 export default CategoryDonutChart;
