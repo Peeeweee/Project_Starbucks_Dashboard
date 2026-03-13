@@ -13,25 +13,31 @@ interface InsightCardProps {
   value: string;
   description: string;
   delay: number;
+  colorClass: string;
 }
 
-const InsightCard = ({ icon: Icon, title, value, description, delay }: InsightCardProps) => (
+const InsightCard = ({ icon: Icon, title, value, description, delay, colorClass }: InsightCardProps) => (
   <div
-    className="bg-card border border-border rounded-lg p-5 opacity-0 animate-fade-in"
+    className={`group relative overflow-hidden bg-card border border-border rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 opacity-0 animate-fade-in`}
     style={{ animationDelay: `${delay}ms` }}
   >
-    <div className="flex items-center gap-3 mb-3">
-      <div className="h-9 w-9 rounded-lg bg-sidebar-accent flex items-center justify-center">
-        <Icon className="h-4 w-4 text-primary" />
+    <div className={`absolute top-0 right-0 w-32 h-32 -mr-8 -mt-8 rounded-full opacity-[0.03] transition-transform duration-500 group-hover:scale-110 ${colorClass.split(' ')[0]}`} />
+    
+    <div className="flex flex-col gap-4 relative z-10">
+      <div className={`h-12 w-12 rounded-xl flex items-center justify-center shadow-sm ${colorClass}`}>
+        <Icon className="h-6 w-6 text-white" />
       </div>
-      <span className="text-sm font-medium text-muted-foreground">{title}</span>
+      
+      <div>
+        <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">{title}</p>
+        <p className="text-3xl font-black text-foreground mb-2">{value}</p>
+        <p className="text-sm text-muted-foreground leading-relaxed font-medium">{description}</p>
+      </div>
     </div>
-    <p className="text-xl font-semibold text-foreground mb-1">{value}</p>
-    <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
   </div>
 );
 
-const COLORS = ["#00704A", "#CBA258", "#1E3932", "#6B7280", "#00A862"];
+const COLORS = ["#00704A", "#CBA258", "#1E3932", "#00A862", "#006241", "#D4E9E2"];
 
 const Insights = () => {
   const { data: aggregates, isLoading } = useStarbucksData();
@@ -52,12 +58,48 @@ const Insights = () => {
   const peakTimeSlot = [...aggregates.timeDist].sort((a, b) => b.count - a.count)[0];
 
   const insights = [
-    { icon: Users, title: "Who Spends the Most?", value: maxAgeGroup.age_group, description: `People in the ${maxAgeGroup.age_group} age group spend the most, with an average of $${maxAgeGroup.avg_spend.toFixed(2)}.` },
-    { icon: Coffee, title: "Favorite Drink", value: topDrink.drink, description: `${topDrink.drink} is the favorite drink type for most people in our study.` },
-    { icon: Clock, title: "Busiest Time", value: peakTimeSlot.time_slot, description: `Most people visit Starbucks during ${peakTimeSlot.time_slot}, which is the busiest time of the day.` },
-    { icon: DollarSign, title: "Total Sales", value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`, description: "This is the total amount of money made from all the orders we looked at." },
-    { icon: Award, title: "Rewards Members", value: `${kpis.rewards_pct.toFixed(1)}% Members`, description: "People with rewards cards are happier and visit more often than others." },
-    { icon: TrendingUp, title: "Happy Score", value: `${kpis.avg_satisfaction.toFixed(2)}/5`, description: "Most customers are very happy with their drinks and how easy it is to order ahead." },
+    { 
+      icon: Users, 
+      title: "Who Spends the Most?", 
+      value: maxAgeGroup.age_group, 
+      colorClass: "bg-[#00704A]",
+      description: `People in the ${maxAgeGroup.age_group} age group spend the most, with an average of $${maxAgeGroup.avg_spend.toFixed(2)}.` 
+    },
+    { 
+      icon: Coffee, 
+      title: "Favorite Drink", 
+      value: topDrink.drink, 
+      colorClass: "bg-[#CBA258]",
+      description: `${topDrink.drink} is the favorite drink type for most people in our study.` 
+    },
+    { 
+      icon: Clock, 
+      title: "Busiest Time", 
+      value: peakTimeSlot.time_slot, 
+      colorClass: "bg-[#1E3932]",
+      description: `Most people visit Starbucks during ${peakTimeSlot.time_slot}, which is the busiest time of the day.` 
+    },
+    { 
+      icon: DollarSign, 
+      title: "Total Sales", 
+      value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`, 
+      colorClass: "bg-[#00A862]",
+      description: "This is the total amount of money made from all the orders we looked at." 
+    },
+    { 
+      icon: Award, 
+      title: "Rewards Members", 
+      value: `${kpis.rewards_pct.toFixed(1)}% Members`, 
+      colorClass: "bg-[#27251F]",
+      description: "People with rewards cards are happier and visit more often than others." 
+    },
+    { 
+      icon: TrendingUp, 
+      title: "Happy Score", 
+      value: `${kpis.avg_satisfaction.toFixed(2)}/5`, 
+      colorClass: "bg-[#DA291C]",
+      description: "Most customers are very happy with their drinks and how easy it is to order ahead." 
+    },
   ];
 
   return (
