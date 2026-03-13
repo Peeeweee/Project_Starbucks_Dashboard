@@ -52,19 +52,19 @@ const Insights = () => {
   const peakTimeSlot = [...aggregates.timeDist].sort((a, b) => b.count - a.count)[0];
 
   const insights = [
-    { icon: Users, title: "Highest Spenders", value: maxAgeGroup.age_group, description: `The ${maxAgeGroup.age_group} demographic has the highest average spend per transaction at $${maxAgeGroup.avg_spend.toFixed(2)}.` },
-    { icon: Coffee, title: "Top Category", value: topDrink.drink, description: `${topDrink.drink} is the most requested category, making up a significant portion of the 100k sample.` },
-    { icon: Clock, title: "Peak Period", value: peakTimeSlot.time_slot, description: `The highest transaction volume occurs during ${peakTimeSlot.time_slot} hours, indicating strong daily routines.` },
-    { icon: DollarSign, title: "Revenue Milestone", value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`, description: "Total revenue across the sample set highlights the scale of the customer base and market reach." },
-    { icon: Award, title: "Loyalty Uplift", value: `${kpis.rewards_pct.toFixed(1)}% Members`, description: "Rewards members show significantly higher engagement and satisfaction levels compared to guests." },
-    { icon: TrendingUp, title: "Avg Satisfaction", value: `${kpis.avg_satisfaction.toFixed(2)}/5`, description: "Customers report high levels of satisfaction, particularly with order-ahead and customization options." },
+    { icon: Users, title: "Who Spends the Most?", value: maxAgeGroup.age_group, description: `People in the ${maxAgeGroup.age_group} age group spend the most, with an average of $${maxAgeGroup.avg_spend.toFixed(2)}.` },
+    { icon: Coffee, title: "Favorite Drink", value: topDrink.drink, description: `${topDrink.drink} is the favorite drink type for most people in our study.` },
+    { icon: Clock, title: "Busiest Time", value: peakTimeSlot.time_slot, description: `Most people visit Starbucks during ${peakTimeSlot.time_slot}, which is the busiest time of the day.` },
+    { icon: DollarSign, title: "Total Sales", value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`, description: "This is the total amount of money made from all the orders we looked at." },
+    { icon: Award, title: "Rewards Members", value: `${kpis.rewards_pct.toFixed(1)}% Members`, description: "People with rewards cards are happier and visit more often than others." },
+    { icon: TrendingUp, title: "Happy Score", value: `${kpis.avg_satisfaction.toFixed(2)}/5`, description: "Most customers are very happy with their drinks and how easy it is to order ahead." },
   ];
 
   return (
     <>
       <PageHeader
-        title="Key Insights"
-        subtitle="Data-driven findings from the Starbucks Customer Ordering Patterns 2024-2025 dataset."
+        title="Quick Facts"
+        subtitle="Important things we learned from looking at 100,000 Starbucks orders."
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
@@ -74,29 +74,29 @@ const Insights = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <ChartCard title="Average Spend by Age Group" delay={400}>
-          <div className="h-72">
+        <ChartCard title="Average Spend by Age" delay={400}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={ageSpend}>
+              <BarChart data={ageSpend} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="age_group" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[12, 'auto']} />
+                <XAxis dataKey="age_group" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[13.5, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
                 <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-green))" radius={[4, 4, 0, 0]} barSize={36} />
+                <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-green))" radius={[8, 8, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
 
-        <ChartCard title="Channel Distribution" delay={500}>
-          <div className="h-72">
+        <ChartCard title="How People Order" delay={500}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie data={aggregates.channelDist} cx="50%" cy="50%" innerRadius={60} outerRadius={95} paddingAngle={3} dataKey="count" nameKey="channel" stroke="none">
+                <Pie data={aggregates.channelDist} cx="50%" cy="50%" innerRadius={80} outerRadius={125} paddingAngle={5} dataKey="count" nameKey="channel" stroke="none">
                   {aggregates.channelDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip formatter={(v: number) => v.toLocaleString()} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Legend verticalAlign="bottom" iconType="circle" iconSize={8} formatter={(v) => <span className="text-muted-foreground text-xs">{v}</span>} />
+                <Legend verticalAlign="bottom" iconType="circle" iconSize={10} formatter={(v) => <span className="text-foreground font-bold text-sm ml-1">{v}</span>} />
               </PieChart>
             </ResponsiveContainer>
           </div>

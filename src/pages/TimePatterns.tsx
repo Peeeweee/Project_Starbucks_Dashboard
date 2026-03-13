@@ -20,49 +20,49 @@ const TimePatterns = () => {
   return (
     <>
       <PageHeader
-        title="Time & Visit Patterns"
-        subtitle="Analyzing temporal patterns in transaction volume by day and time slot."
+        title="When People Visit"
+        subtitle="Checking which days and times are the busiest at Starbucks."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-        <ChartCard title="Orders by Day of Week" delay={0}>
-          <div className="h-72">
+        <ChartCard title="Daily Orders" delay={0}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.ordersByDay}>
+              <BarChart data={aggregates.ordersByDay} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="day" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="day" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} />
+                <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[12000, 'auto']} tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`} />
                 <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="count" fill="hsl(var(--starbucks-green))" radius={[4, 4, 0, 0]} barSize={40} />
+                <Bar dataKey="count" fill="hsl(var(--starbucks-green))" radius={[8, 8, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
 
-        <ChartCard title="Order Volume by Time Slot" delay={100}>
-          <div className="h-72">
+        <ChartCard title="Busiest Times of Day" delay={100}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.timeDist}>
+              <BarChart data={aggregates.timeDist} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="time_slot" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="time_slot" tick={{ fontSize: 11, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} height={60} dy={10} />
+                <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[15000, 'auto']} tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`} />
                 <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="count" fill="hsl(var(--starbucks-forest))" radius={[4, 4, 0, 0]} barSize={40} />
+                <Bar dataKey="count" fill="hsl(var(--starbucks-forest))" radius={[8, 8, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
       </div>
 
-      <ChartCard title="Average Cart Size Trend by Day" delay={200}>
-        <div className="h-72">
+      <ChartCard title="Average Amount Spent Each Day" delay={200}>
+        <div className="h-[450px]">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={aggregates.cartByDay}>
+            <LineChart data={aggregates.cartByDay} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-              <XAxis dataKey="day" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={['auto', 'auto']} />
+              <XAxis dataKey="day" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} />
+              <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[14, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
               <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-              <Line type="monotone" dataKey="avg" stroke="hsl(var(--starbucks-green))" strokeWidth={3} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="avg" stroke="hsl(var(--starbucks-green))" strokeWidth={5} dot={{ r: 6, fill: "hsl(var(--starbucks-green))" }} activeDot={{ r: 8 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

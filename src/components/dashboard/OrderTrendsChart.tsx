@@ -14,9 +14,9 @@ const OrderTrendsChart = ({ data }: OrderTrendsProps) => (
     delay={200}
     className="h-full"
   >
-    <div className="h-[340px] w-full mt-4">
+    <div className="h-[450px] w-full mt-4">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+        <AreaChart data={data} margin={{ top: 20, right: 30, left: 30, bottom: 30 }}>
           <defs>
             <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.15}/>
@@ -29,12 +29,15 @@ const OrderTrendsChart = ({ data }: OrderTrendsProps) => (
             tick={{ fontSize: 13, fontWeight: 600, fill: "hsl(var(--muted-foreground))" }} 
             axisLine={false} 
             tickLine={false} 
-            dy={15}
+            dy={10}
           />
           <YAxis 
             tick={{ fontSize: 13, fontWeight: 600, fill: "hsl(var(--muted-foreground))" }} 
             axisLine={false} 
-            tickLine={false} 
+            tickLine={false}
+            width={70}
+            domain={[13000, 'auto']}
+            tickFormatter={(v) => `${(v / 1000).toFixed(1)}k`}
           />
           <Tooltip
             contentStyle={{

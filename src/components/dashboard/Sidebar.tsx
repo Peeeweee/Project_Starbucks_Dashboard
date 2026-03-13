@@ -13,12 +13,12 @@ import {
 
 const tabs = [
   { label: "Overview", path: "/", icon: BarChart3 },
-  { label: "Demographics", path: "/demographics", icon: Users },
-  { label: "Behavior", path: "/behavior", icon: ShoppingCart },
-  { label: "Temporal", path: "/time-patterns", icon: Clock },
-  { label: "Products", path: "/products", icon: Coffee },
-  { label: "Financials", path: "/spending", icon: DollarSign },
-  { label: "Insights", path: "/insights", icon: Lightbulb },
+  { label: "Customers", path: "/demographics", icon: Users },
+  { label: "Ordering", path: "/behavior", icon: ShoppingCart },
+  { label: "Visit Times", path: "/time-patterns", icon: Clock },
+  { label: "Drinks", path: "/products", icon: Coffee },
+  { label: "Spending", path: "/spending", icon: DollarSign },
+  { label: "Quick Facts", path: "/insights", icon: Lightbulb },
 ];
 
 const AppSidebar = () => {
@@ -39,7 +39,7 @@ const AppSidebar = () => {
                 STARBUCKS
               </span>
               <span className="text-[10px] font-bold text-emerald-400/60 tracking-[0.3em] uppercase">
-                Intelligence
+                Data Guide
               </span>
             </div>
           )}

@@ -15,7 +15,7 @@ const RewardsCompareChart = ({ data }: RewardsCompareProps) => (
   >
     <div className="h-[340px] w-full mt-4">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+        <BarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
           <CartesianGrid strokeDasharray="8 8" stroke="hsl(var(--chart-grid))" vertical={false} />
           <XAxis 
             dataKey="metric" 
@@ -27,7 +27,8 @@ const RewardsCompareChart = ({ data }: RewardsCompareProps) => (
           <YAxis 
             tick={{ fontSize: 13, fontWeight: 700, fill: "hsl(var(--muted-foreground))" }} 
             axisLine={false} 
-            tickLine={false} 
+            tickLine={false}
+            width={70}
           />
           <Tooltip
             contentStyle={{
@@ -51,7 +52,7 @@ const RewardsCompareChart = ({ data }: RewardsCompareProps) => (
           <Bar
             dataKey="NonMembers"
             name="General Customer"
-            fill="hsl(159, 20%, 80%)"
+            fill="hsl(38, 46%, 56%)"
             radius={[6, 6, 0, 0]}
             barSize={30}
           />

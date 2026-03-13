@@ -20,49 +20,49 @@ const Spending = () => {
   return (
     <>
       <PageHeader
-        title="Spending Insights"
-        subtitle="Factors influencing customer spending across demographics and categories."
+        title="Spending Facts"
+        subtitle="Learning what makes customers spend more on their coffee."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-        <ChartCard title="Average Spending by Age Group" delay={0}>
-          <div className="h-72">
+        <ChartCard title="Average Spend by Age" delay={0}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.ageSpend}>
+              <BarChart data={aggregates.ageSpend} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="age_group" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[12, 'auto']} />
+                <XAxis dataKey="age_group" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} />
+                <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[13.5, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
                 <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-green))" radius={[4, 4, 0, 0]} barSize={40} />
+                <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-green))" radius={[8, 8, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
 
-        <ChartCard title="Spending by Location Type" delay={100}>
-          <div className="h-72">
+        <ChartCard title="Spending by Where People Live" delay={100}>
+          <div className="h-[450px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.locCompare}>
+              <BarChart data={aggregates.locCompare} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="loc" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+                <XAxis dataKey="loc" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} />
+                <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[14, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
                 <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="spend" fill="hsl(var(--starbucks-forest))" radius={[4, 4, 0, 0]} barSize={40} />
+                <Bar dataKey="spend" fill="hsl(var(--starbucks-forest))" radius={[8, 8, 0, 0]} barSize={50} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
       </div>
 
-      <ChartCard title="Product Customization vs Spending Impact" delay={200}>
-        <div className="h-72">
+      <ChartCard title="How Extra Toppings Change the Price" delay={200}>
+        <div className="h-[450px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={aggregates.customSpend}>
+            <BarChart data={aggregates.customSpend} margin={{ top: 20, right: 20, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-              <XAxis dataKey="customizations" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} label={{ value: 'Num Customizations', position: 'insideBottom', offset: -5 }} />
-              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[10, 'auto']} />
+              <XAxis dataKey="customizations" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} label={{ value: 'Extra Customizations', position: 'insideBottom', offset: -35 }} />
+              <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[13, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
               <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-              <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-gold))" radius={[4, 4, 0, 0]} barSize={40} />
+              <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-gold))" radius={[8, 8, 0, 0]} barSize={50} />
             </BarChart>
           </ResponsiveContainer>
         </div>

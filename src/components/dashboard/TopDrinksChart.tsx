@@ -26,18 +26,22 @@ const TopDrinksChart = ({ data }: TopDrinksProps) => {
       icon={Coffee}
       delay={300}
     >
-      <div className="h-[340px] w-full mt-4">
+      <div className="h-[450px] w-full mt-4">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={topData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
+          <BarChart data={topData} layout="vertical" margin={{ top: 20, right: 30, left: 30, bottom: 20 }}>
             <CartesianGrid strokeDasharray="8 8" stroke="hsl(var(--chart-grid))" horizontal={false} />
-            <XAxis type="number" hide />
+            <XAxis 
+              type="number" 
+              domain={[10000, 'dataMax + 1000']} 
+              hide 
+            />
             <YAxis
               dataKey="drink"
               type="category"
               tick={{ fontSize: 13, fontWeight: 700, fill: "hsl(var(--foreground))" }}
               axisLine={false}
               tickLine={false}
-              width={150}
+              width={120}
             />
             <Tooltip
               cursor={{ fill: "hsl(var(--primary)/0.03)" }}
