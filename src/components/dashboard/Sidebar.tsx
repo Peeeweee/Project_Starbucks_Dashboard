@@ -29,20 +29,40 @@ const AppSidebar = () => {
     <Sidebar collapsible="icon" className="border-none shadow-2xl">
       <SidebarContent className="bg-[#002B1B] text-white">
         {/* Brand Identity */}
-        <div className="flex items-center gap-4 px-6 py-10">
-          <div className="h-12 w-12 rounded-2xl bg-[#006241] flex items-center justify-center shadow-2xl shadow-black/40 rotate-3 transform group-hover:rotate-0 transition-transform duration-500">
-            <Coffee className="h-7 w-7 text-white" />
-          </div>
-          {!collapsed && (
-            <div className="flex flex-col">
-              <span className="text-xl font-black text-white tracking-tighter leading-none mb-0.5">
-                STARBUCKS
-              </span>
-              <span className="text-[10px] font-bold text-emerald-400/60 tracking-[0.3em] uppercase">
-                Data Guide
-              </span>
+        <div className="relative overflow-hidden group px-6 py-12 mb-4">
+          <div className="flex items-center gap-5 relative z-10 transition-transform duration-500 group-hover:translate-x-1">
+            {/* Liquid Logo Container */}
+            <div className="relative h-14 w-14 rounded-[22px] bg-[#002B1B] overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 animate-float">
+              {/* Liquid Wave Effect */}
+              <div className="absolute top-[60%] left-1/2 -translate-x-1/2 w-[200%] h-[200%] bg-[#006241] rounded-[40%] animate-liquid opacity-80" />
+              <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[200%] h-[200%] bg-emerald-500/30 rounded-[35%] animate-liquid !animation-delay-[-5s] opacity-50" />
+              
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Coffee className="h-8 w-8 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] transition-transform duration-700 group-hover:scale-110" />
+              </div>
             </div>
-          )}
+
+            {!collapsed && (
+              <div className="flex flex-col">
+                <div className="relative">
+                  <span className="text-2xl font-black text-white tracking-[-0.03em] leading-none block">
+                    STARBUCKS
+                  </span>
+                  <div className="absolute inset-0 animate-shimmer pointer-events-none" />
+                </div>
+                
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                  <span className="text-[10px] font-black text-emerald-400/60 tracking-[0.35em] uppercase">
+                    DATA GUIDE
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Subtle Background Glow */}
+          <div className="absolute -top-10 -left-10 w-32 h-32 bg-emerald-500/10 blur-[50px] rounded-full pointer-events-none" />
         </div>
 
         {/* Navigation */}

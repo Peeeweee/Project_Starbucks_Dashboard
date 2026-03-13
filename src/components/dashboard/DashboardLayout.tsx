@@ -1,7 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/dashboard/Sidebar";
 import { Outlet } from "react-router-dom";
-import { Bell, Search, Settings, HelpCircle, User } from "lucide-react";
 
 const DashboardLayout = () => (
   <SidebarProvider>
@@ -18,7 +17,6 @@ const DashboardLayout = () => (
           <div className="max-w-[1700px] mx-auto">
             <Outlet />
           </div>
-          
         </main>
       </div>
     </div>
