@@ -1,6 +1,5 @@
 import { BarChart3, Users, ShoppingCart, Clock, Coffee, DollarSign, Lightbulb } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -28,36 +27,51 @@ const AppSidebar = () => {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent>
-        <div className="flex items-center gap-2.5 px-4 py-5 border-b border-border">
-          <Coffee className="h-7 w-7 text-primary shrink-0" />
+      <SidebarContent className="bg-card">
+
+        {/* Brand Header */}
+        <div className="flex items-center gap-3 px-5 py-6 border-b border-border">
+          <div className="p-2 rounded-lg bg-[#006241]/10">
+            <Coffee className="h-6 w-6 text-[#006241]" />
+          </div>
+
           {!collapsed && (
-            <span className="text-base font-semibold text-foreground tracking-tight">
-              Starbucks Analytics
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm font-semibold text-foreground">
+                Starbucks
+              </span>
+              <span className="text-xs text-muted-foreground">
+                Analytics Dashboard
+              </span>
+            </div>
           )}
         </div>
-        <SidebarGroup>
+
+        {/* Navigation */}
+        <SidebarGroup className="mt-4">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1 px-3">
+
               {tabs.map(({ label, path, icon: Icon }) => (
                 <SidebarMenuItem key={path}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={path}
                       end
-                      className="hover:bg-muted/50"
-                      activeClassName="bg-sidebar-accent text-primary font-medium"
+                      className="flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 hover:bg-muted/60"
+                      activeClassName="bg-[#006241]/10 text-[#006241] font-medium"
                     >
-                      <Icon className="mr-2 h-4 w-4 shrink-0" />
-                      {!collapsed && <span>{label}</span>}
+                      <Icon className="h-4 w-4 shrink-0" />
+                      {!collapsed && <span className="text-sm">{label}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
       </SidebarContent>
     </Sidebar>
   );

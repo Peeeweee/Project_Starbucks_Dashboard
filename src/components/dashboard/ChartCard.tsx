@@ -5,12 +5,33 @@ interface ChartCardProps {
   delay?: number;
 }
 
-const ChartCard = ({ title, children, className = "", delay = 0 }: ChartCardProps) => (
+const ChartCard = ({
+  title,
+  children,
+  className = "",
+  delay = 0,
+}: ChartCardProps) => (
   <div
-    className={`bg-card border border-border rounded-lg p-5 opacity-0 animate-fade-in ${className}`}
+    className={`
+      bg-[#fdfaf6]
+      border border-[#efe8df]
+      rounded-2xl
+      p-6
+      shadow-md
+      hover:shadow-xl
+      hover:-translate-y-1
+      transition-all
+      duration-300
+      opacity-0
+      animate-fade-in
+      ${className}
+    `}
     style={{ animationDelay: `${delay}ms` }}
   >
-    <h3 className="text-sm font-medium text-foreground mb-4">{title}</h3>
+    <h3 className="text-sm font-semibold text-[#1E3932] mb-5 tracking-wide">
+      {title}
+    </h3>
+
     {children}
   </div>
 );

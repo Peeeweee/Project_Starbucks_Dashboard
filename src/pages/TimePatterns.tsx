@@ -1,6 +1,15 @@
 import {
-  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
 } from "recharts";
+
 import PageHeader from "@/components/dashboard/PageHeader";
 import ChartCard from "@/components/dashboard/ChartCard";
 import { useStarbucksData } from "@/hooks/useStarbucksData";
@@ -11,63 +20,160 @@ const TimePatterns = () => {
 
   if (isLoading || !aggregates) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex h-[65vh] items-center justify-center">
+        <Loader2 className="h-10 w-10 animate-spin text-[#006241]" />
       </div>
     );
   }
 
+  const tooltipStyle = {
+    backgroundColor: "#fdfaf6",
+    border: "1px solid #e7e2da",
+    borderRadius: 12,
+    fontSize: 13,
+    boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  };
+
   return (
-    <>
+    <div className="space-y-6">
+
       <PageHeader
         title="Time & Visit Patterns"
-        subtitle="Analyzing temporal patterns in transaction volume by day and time slot."
+        subtitle="Analyzing temporal trends in transaction volume and purchasing behavior."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-        <ChartCard title="Orders by Day of Week" delay={0}>
-          <div className="h-72">
+      {/* Top Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        {/* Orders by Day */}
+        <ChartCard
+          title="Orders by Day of Week"
+          delay={0}
+          className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+        >
+          <div className="h-72 p-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={aggregates.ordersByDay}>
-                <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="day" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="count" fill="hsl(var(--starbucks-green))" radius={[4, 4, 0, 0]} barSize={40} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e8e4de"
+                  vertical={false}
+                />
+
+                <XAxis
+                  dataKey="day"
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <YAxis
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <Tooltip contentStyle={tooltipStyle} />
+
+                <Bar
+                  dataKey="count"
+                  fill="#006241"
+                  radius={[8, 8, 0, 0]}
+                  barSize={36}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
 
-        <ChartCard title="Order Volume by Time Slot" delay={100}>
-          <div className="h-72">
+        {/* Time Slot Volume */}
+        <ChartCard
+          title="Order Volume by Time Slot"
+          delay={100}
+          className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+        >
+          <div className="h-72 p-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={aggregates.timeDist}>
-                <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="time_slot" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="count" fill="hsl(var(--starbucks-forest))" radius={[4, 4, 0, 0]} barSize={40} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e8e4de"
+                  vertical={false}
+                />
+
+                <XAxis
+                  dataKey="time_slot"
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <YAxis
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <Tooltip contentStyle={tooltipStyle} />
+
+                <Bar
+                  dataKey="count"
+                  fill="#1E3932"
+                  radius={[8, 8, 0, 0]}
+                  barSize={36}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
+
       </div>
 
-      <ChartCard title="Average Cart Size Trend by Day" delay={200}>
-        <div className="h-72">
+      {/* Full Width Trend */}
+      <ChartCard
+        title="Average Cart Size Trend by Day"
+        delay={200}
+        className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+      >
+        <div className="h-72 p-2">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={aggregates.cartByDay}>
-              <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-              <XAxis dataKey="day" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={['auto', 'auto']} />
-              <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-              <Line type="monotone" dataKey="avg" stroke="hsl(var(--starbucks-green))" strokeWidth={3} dot={{ r: 4 }} />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e8e4de"
+                vertical={false}
+              />
+
+              <XAxis
+                dataKey="day"
+                tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                axisLine={false}
+                tickLine={false}
+              />
+
+              <YAxis
+                tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                axisLine={false}
+                tickLine={false}
+                domain={["auto", "auto"]}
+              />
+
+              <Tooltip contentStyle={tooltipStyle} />
+
+              <Line
+                type="monotone"
+                dataKey="avg"
+                stroke="#C7A86D"
+                strokeWidth={3}
+                dot={{ r: 4 }}
+                activeDot={{ r: 6 }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </ChartCard>
-    </>
+
+    </div>
   );
 };
 

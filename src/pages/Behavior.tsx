@@ -1,5 +1,12 @@
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
 } from "recharts";
 import PageHeader from "@/components/dashboard/PageHeader";
 import ChartCard from "@/components/dashboard/ChartCard";
@@ -11,67 +18,192 @@ const Behavior = () => {
 
   if (isLoading || !aggregates) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex h-[65vh] items-center justify-center">
+        <Loader2 className="h-10 w-10 animate-spin text-[#006241]" />
       </div>
     );
   }
 
+  const tooltipStyle = {
+    backgroundColor: "#fdfaf6",
+    border: "1px solid #e7e2da",
+    borderRadius: 12,
+    fontSize: 13,
+    boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  };
+
   return (
-    <>
+    <div className="space-y-6">
       <PageHeader
         title="Ordering Behavior"
         subtitle="Analyzing patterns in customization, loyalty, and purchase habits."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-        <ChartCard title="Drink Category Distribution" delay={0}>
-          <div className="h-72">
+      {/* Top Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        {/* Drink Distribution */}
+        <ChartCard
+          title="Drink Category Distribution"
+          delay={0}
+          className="bg-[#fdfaf6] border border-[#efe8df] shadow-md hover:shadow-xl transition-all duration-300 rounded-2xl"
+        >
+          <div className="h-72 p-2">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.drinkDist}>
-                <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="drink" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="count" fill="hsl(var(--starbucks-green))" radius={[4, 4, 0, 0]} barSize={40} />
+              <BarChart
+                data={aggregates.drinkDist}
+                margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e8e4de"
+                  vertical={false}
+                />
+
+                <XAxis
+                  dataKey="drink"
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <YAxis
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <Tooltip contentStyle={tooltipStyle} />
+
+                <Bar
+                  dataKey="count"
+                  fill="#006241"
+                  radius={[8, 8, 0, 0]}
+                  barSize={42}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
 
-        <ChartCard title="Loyalty: Members vs Non-Members" delay={100}>
-          <div className="h-72">
+        {/* Loyalty Comparison */}
+        <ChartCard
+          title="Loyalty: Members vs Non-Members"
+          delay={100}
+          className="bg-[#fdfaf6] border border-[#efe8df] shadow-md hover:shadow-xl transition-all duration-300 rounded-2xl"
+        >
+          <div className="h-72 p-2">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.rewardsCompare} layout="vertical">
-                <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" horizontal={false} />
-                <XAxis type="number" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-                <YAxis dataKey="metric" type="category" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} width={100} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Legend iconType="circle" iconSize={8} formatter={(v) => <span className="text-muted-foreground text-xs">{v}</span>} />
-                <Bar dataKey="Members" fill="hsl(var(--starbucks-green))" barSize={16} radius={[0, 4, 4, 0]} />
-                <Bar dataKey="NonMembers" fill="hsl(var(--muted))" barSize={16} radius={[0, 4, 4, 0]} />
+              <BarChart
+                data={aggregates.rewardsCompare}
+                layout="vertical"
+                margin={{ top: 10, right: 20, left: 20, bottom: 0 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e8e4de"
+                  horizontal={false}
+                />
+
+                <XAxis
+                  type="number"
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <YAxis
+                  dataKey="metric"
+                  type="category"
+                  width={120}
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+
+                <Tooltip contentStyle={tooltipStyle} />
+
+                <Legend
+                  iconType="circle"
+                  iconSize={10}
+                  wrapperStyle={{
+                    fontSize: "12px",
+                    color: "#666",
+                  }}
+                />
+
+                <Bar
+                  dataKey="Members"
+                  fill="#006241"
+                  barSize={18}
+                  radius={[0, 6, 6, 0]}
+                />
+
+                <Bar
+                  dataKey="NonMembers"
+                  fill="#c8b9a6"
+                  barSize={18}
+                  radius={[0, 6, 6, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
       </div>
 
+      {/* Bottom Chart */}
       <div className="grid grid-cols-1">
-        <ChartCard title="Customization Volume vs. Average Spend" delay={200}>
-          <div className="h-72">
+        <ChartCard
+          title="Customization Volume vs Average Spend"
+          delay={200}
+          className="bg-[#fdfaf6] border border-[#efe8df] shadow-md hover:shadow-xl transition-all duration-300 rounded-2xl"
+        >
+          <div className="h-72 p-2">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={aggregates.customSpend}>
-                <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="customizations" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} label={{ value: 'Number of Customizations', position: 'insideBottom', offset: -5 }} />
-                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[5, 'auto']} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-                <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-gold))" radius={[4, 4, 0, 0]} barSize={40} />
+              <BarChart
+                data={aggregates.customSpend}
+                margin={{ top: 10, right: 20, left: 0, bottom: 20 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#e8e4de"
+                  vertical={false}
+                />
+
+                <XAxis
+                  dataKey="customizations"
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                  label={{
+                    value: "Number of Customizations",
+                    position: "insideBottom",
+                    offset: -10,
+                    style: { fontSize: 12, fill: "#666" },
+                  }}
+                />
+
+                <YAxis
+                  tick={{ fontSize: 12, fill: "#5b5b5b" }}
+                  axisLine={false}
+                  tickLine={false}
+                  domain={[5, "auto"]}
+                />
+
+                <Tooltip contentStyle={tooltipStyle} />
+
+                <Bar
+                  dataKey="avg_spend"
+                  fill="#c7a86d"
+                  radius={[8, 8, 0, 0]}
+                  barSize={42}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </ChartCard>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -4,16 +4,38 @@ import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => (
   <SidebarProvider>
-    <div className="min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full bg-[#f6f3ef]">
+
       <AppSidebar />
+
       <div className="flex-1 flex flex-col">
-        <header className="h-12 flex items-center border-b border-border bg-card px-2">
+
+        {/* Top Header */}
+        <header className="
+          h-14
+          flex
+          items-center
+          justify-between
+          border-b
+          border-[#efe8df]
+          bg-[#fdfaf6]
+          px-6
+          shadow-sm
+        ">
           <SidebarTrigger />
         </header>
-        <main className="flex-1 p-8 bg-background overflow-auto">
+
+        {/* Main Content */}
+        <main className="
+          flex-1
+          p-8
+          overflow-auto
+        ">
           <Outlet />
         </main>
+
       </div>
+
     </div>
   </SidebarProvider>
 );

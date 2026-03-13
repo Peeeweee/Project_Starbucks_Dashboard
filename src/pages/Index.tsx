@@ -11,8 +11,8 @@ const Index = () => {
 
   if (isLoading || !aggregates) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="flex h-[65vh] items-center justify-center">
+        <Loader2 className="h-10 w-10 animate-spin text-[#006241]" />
       </div>
     );
   }
@@ -20,28 +20,67 @@ const Index = () => {
   const { kpis } = aggregates;
 
   const kpiData = [
-    { label: "Total Samples", value: kpis.total_orders.toLocaleString(), icon: Users },
-    { label: "Total Revenue", value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`, icon: ShoppingCart },
-    { label: "Average Spend", value: `$${kpis.avg_spend.toFixed(2)}`, icon: DollarSign },
-    { label: "Most Popular Drink", value: kpis.most_popular_drink, icon: Coffee },
+    {
+      label: "Total Samples",
+      value: kpis.total_orders.toLocaleString(),
+      icon: Users,
+    },
+    {
+      label: "Total Revenue",
+      value: `$${(kpis.total_revenue / 1000000).toFixed(2)}M`,
+      icon: ShoppingCart,
+    },
+    {
+      label: "Average Spend",
+      value: `$${kpis.avg_spend.toFixed(2)}`,
+      icon: DollarSign,
+    },
+    {
+      label: "Most Popular Drink",
+      value: kpis.most_popular_drink,
+      icon: Coffee,
+    },
   ];
 
   return (
-    <>
-      <PageHeader title="Overview" subtitle="Big-picture snapshot of transaction patterns across regions." />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="space-y-6">
+
+      <PageHeader
+        title="Overview"
+        subtitle="Big-picture snapshot of transaction patterns across regions."
+      />
+
+      {/* KPI SECTION */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {kpiData.map((kpi, i) => (
-          <KpiCard key={kpi.label} {...kpi} delay={i * 50} />
+          <div
+            key={kpi.label}
+            className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+          >
+            <KpiCard {...kpi} delay={i * 60} />
+          </div>
         ))}
       </div>
-      <div className="mb-6">
+
+      {/* ORDER TRENDS */}
+      <div className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md p-4 hover:shadow-xl transition-all duration-300">
         <OrderTrendsChart data={aggregates.ordersByDay} />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <TopDrinksChart data={aggregates.drinkDist} />
-        <CategoryDonutChart data={aggregates.channelDist} />
+
+      {/* BOTTOM CHARTS */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <div className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md p-4 hover:shadow-xl transition-all duration-300">
+          <TopDrinksChart data={aggregates.drinkDist} />
+        </div>
+
+        <div className="bg-[#fdfaf6] border border-[#efe8df] rounded-2xl shadow-md p-4 hover:shadow-xl transition-all duration-300">
+          <CategoryDonutChart data={aggregates.channelDist} />
+        </div>
+
       </div>
-    </>
+
+    </div>
   );
 };
 
