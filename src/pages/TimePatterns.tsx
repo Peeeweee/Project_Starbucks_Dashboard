@@ -57,12 +57,12 @@ const TimePatterns = () => {
       <ChartCard title="Average Amount Spent Each Day" delay={200}>
         <div className="h-[450px]">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={aggregates.cartByDay} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+            <LineChart data={aggregates.spendByDay} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
               <XAxis dataKey="day" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} />
-              <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[14, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
-              <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-              <Line type="monotone" dataKey="avg" stroke="hsl(var(--starbucks-green))" strokeWidth={5} dot={{ r: 6, fill: "hsl(var(--starbucks-green))" }} activeDot={{ r: 8 }} />
+              <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[13, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
+              <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
+              <Line type="monotone" dataKey="avg_spend" stroke="#006241" strokeWidth={5} dot={{ r: 6, fill: "#006241", strokeWidth: 2, stroke: "#fff" }} activeDot={{ r: 8, strokeWidth: 0 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

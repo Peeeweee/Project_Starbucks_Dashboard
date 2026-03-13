@@ -1,5 +1,5 @@
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts";
 import PageHeader from "@/components/dashboard/PageHeader";
 import ChartCard from "@/components/dashboard/ChartCard";
@@ -57,13 +57,13 @@ const Spending = () => {
       <ChartCard title="How Extra Toppings Change the Price" delay={200}>
         <div className="h-[450px]">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={aggregates.customSpend} margin={{ top: 20, right: 20, left: 20, bottom: 60 }}>
+            <LineChart data={aggregates.customSpend} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} />
               <XAxis dataKey="customizations" tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} interval={0} dy={10} label={{ value: 'Extra Customizations', position: 'insideBottom', offset: -35 }} />
               <YAxis tick={{ fontSize: 13, fontWeight: 700 }} axisLine={false} tickLine={false} width={70} domain={[13, 'auto']} tickFormatter={(v) => `$${v.toFixed(1)}`} />
               <Tooltip formatter={(v: number) => `$${v.toFixed(2)}`} contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 13 }} />
-              <Bar dataKey="avg_spend" fill="hsl(var(--starbucks-gold))" radius={[8, 8, 0, 0]} barSize={50} />
-            </BarChart>
+              <Line type="monotone" dataKey="avg_spend" stroke="#D4AF37" strokeWidth={5} dot={{ r: 6, fill: "#D4AF37", strokeWidth: 2, stroke: "#fff" }} activeDot={{ r: 8, strokeWidth: 0 }} />
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </ChartCard>

@@ -95,11 +95,11 @@ export const computeAggregates = (data: DataRow[]) => {
     count: data.filter(row => getTimeSlot(row.order_time) === slot).length
   }));
 
-  // 7. Cart By Day
-  const cartByDay = daysOrder.map(day => {
+  // 7. Spend By Day
+  const spendByDay = daysOrder.map(day => {
     const dayData = data.filter(row => row.day_of_week === day);
-    const avg = dayData.reduce((acc, row) => acc + (Number(row.cart_size) || 0), 0) / (dayData.length || 1);
-    return { day, avg };
+    const avg = dayData.reduce((acc, row) => acc + (Number(row.total_spend) || 0), 0) / (dayData.length || 1);
+    return { day, avg_spend: avg };
   });
 
   // 8. Custom Spend
@@ -179,7 +179,7 @@ export const computeAggregates = (data: DataRow[]) => {
     regionDist,
     ordersByDay,
     timeDist,
-    cartByDay,
+    spendByDay,
     customSpend,
     ageSpend,
     genderDrink,
