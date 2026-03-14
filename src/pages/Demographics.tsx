@@ -10,12 +10,40 @@ import { Loader2, Users2, UserCircle, Map, Coffee } from "lucide-react";
 const GENDER_COLORS = ["#006241", "#2E1A12", "#D4A373"];
 
 const Demographics = () => {
-  const { data: aggregates, isLoading } = useStarbucksData();
+  const { 
+    data: aggregates, 
+    isLoading, 
+    isRawLoading, 
+    isRawError, 
+    rawError, 
+    isError, 
+    error 
+  } = useStarbucksData();
 
-  if (isLoading || !aggregates) {
+  if (isRawError || isError) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
+      <div className="flex h-[60vh] flex-col items-center justify-center space-y-4">
+        <p className="text-destructive font-bold text-xl">Error loading data</p>
+        <p className="text-muted-foreground text-sm">
+          {(rawError as any)?.message || (error as any)?.message || 'There was a problem loading the analytics data.'}
+        </p>
+        <button 
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-bold"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (isRawLoading || isLoading || !aggregates) {
+    return (
+      <div className="flex h-[60vh] flex-col items-center justify-center space-y-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-muted-foreground animate-pulse font-medium">
+          {isRawLoading ? 'Loading raw customer data...' : 'Processing analytics...'}
+        </p>
       </div>
     );
   }
