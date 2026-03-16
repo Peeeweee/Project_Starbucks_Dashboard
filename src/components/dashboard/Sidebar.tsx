@@ -1,4 +1,4 @@
-import { BarChart3, Users, ShoppingCart, Clock, Coffee, DollarSign, Lightbulb, ChevronRight } from "lucide-react";
+import { BarChart3, Users, ShoppingCart, Clock, Coffee, DollarSign, Lightbulb, ChevronRight, Info } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import {
   Sidebar,
@@ -19,6 +19,7 @@ const tabs = [
   { label: "Drinks", path: "/products", icon: Coffee },
   { label: "Spending", path: "/spending", icon: DollarSign },
   { label: "Quick Facts", path: "/insights", icon: Lightbulb },
+  { label: "About", path: "/about", icon: Info },
 ];
 
 const AppSidebar = () => {

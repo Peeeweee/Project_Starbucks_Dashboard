@@ -11,6 +11,7 @@ import TimePatterns from "./pages/TimePatterns";
 import Products from "./pages/Products";
 import Spending from "./pages/Spending";
 import Insights from "./pages/Insights";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/products" element={<Products />} />
             <Route path="/spending" element={<Spending />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/about" element={<About />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
