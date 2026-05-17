@@ -18,6 +18,11 @@ const developers = [
     role: "Developer",
     image: "developers/Labay.jpg",
   },
+  {
+    name: "CYmon Earl Galzote",
+    role: "Developer",
+    image: "developers/Galzote.jpg",
+  },
 ];
 
 const techStack = [
@@ -53,7 +58,7 @@ const About = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {developers.map((dev, i) => (
             <div 
               key={dev.name} 
