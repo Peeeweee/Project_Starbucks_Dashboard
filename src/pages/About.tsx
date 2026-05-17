@@ -6,7 +6,7 @@ const developers = [
     name: "Kent Paulo Delgado",
     role: "Developer",
     // Use relative paths that Vite will process correctly or use the base URL
-    image: "developers/Delgado_K.jpg",
+    image: "developers/Delgado_Kent.jpg",
   },
   {
     name: "Earl Josh Delgado",
